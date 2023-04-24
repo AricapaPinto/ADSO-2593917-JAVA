@@ -10,9 +10,9 @@ public class Factura extends JFrame {
     // atributos
     private Persona aregloPersonas[];
     private Persona aregloVendedores[];
-    private JTextField input_cedula;
-    private JTextField input_nombre;
-    private JTextField input_calle;
+    public JTextField input_cedula;
+    public JTextField input_nombre;
+    public JTextField input_calle;
     private JButton buscar;
     private JTextField input_cedula_search;
     private JTextField input_n;
@@ -430,14 +430,10 @@ public class Factura extends JFrame {
     
             } else {
                 // isntanciamos la ventana de registros
+                setVisible(false);
+                Registro_persona ventana = new Registro_persona( this , this.input_cedula.getText() );
                 this.input_cedula.setText("");
-                Registro_persona ventana = new Registro_persona();
-                String cedula = ventana.getCedula();
-                String nombre = ventana.getName();
-                // String direccion = ventana.getdireccion();
-                if(!cedula.equalsIgnoreCase("") && !nombre.equalsIgnoreCase("")){
-                    System.out.println(cedula+nombre);
-                }
+                
                 // habilitarInput(this.input_nombre);
                 // habilitarInput(this.input_calle);
                 // System.out.print("Eres perfecta");

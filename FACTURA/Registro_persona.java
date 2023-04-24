@@ -11,7 +11,12 @@ public class Registro_persona extends JFrame {
     private JTextField inputcedula;
     private JTextField inputdireccion;
     Persona listaVendedores[];
-    public Registro_persona(){
+    Factura ventanaOriginal;
+    String cedula;
+
+    public Registro_persona( Factura ventanaOriginal, String cedula ){
+        this.ventanaOriginal = ventanaOriginal;
+        this.cedula = cedula;
         initComponents();
     }
     public void initComponents(){
@@ -39,7 +44,7 @@ public class Registro_persona extends JFrame {
         
         JLabel nombre=new JLabel("NOMBRES:");
         restriccion.gridx=0;
-        restriccion.gridy=1;
+        restriccion.gridy=2;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weighty=1;
@@ -47,9 +52,9 @@ public class Registro_persona extends JFrame {
         restriccion.fill=GridBagConstraints.BOTH;
         container.add(nombre,restriccion);
 
-         inputName=new JTextField();
+        inputName=new JTextField();
         restriccion.gridx=1;
-        restriccion.gridy=1;
+        restriccion.gridy=2;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weighty=1;
@@ -59,7 +64,7 @@ public class Registro_persona extends JFrame {
         // this.dispose();
         JLabel cedula=new JLabel("Cedula:");
         restriccion.gridx=0;
-        restriccion.gridy=2;
+        restriccion.gridy=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weighty=1;
@@ -67,15 +72,20 @@ public class Registro_persona extends JFrame {
         restriccion.fill=GridBagConstraints.BOTH;
         container.add(cedula,restriccion);
 
-        inputcedula=new JTextField();
+        inputcedula=new JTextField( this.cedula );
+        inputcedula.setEnabled(false);
+        inputcedula.setEditable(false);
+        inputcedula.setDisabledTextColor(Color.black);
         restriccion.gridx=1;
-        restriccion.gridy=2;
+        restriccion.gridy=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weighty=1;
         restriccion.weightx=1;
         restriccion.fill=GridBagConstraints.BOTH;
         container.add(inputcedula,restriccion);
+
+
         JLabel direccion=new JLabel("DIRECCION:");
         restriccion.gridx=0;
         restriccion.gridy=3;
@@ -86,7 +96,7 @@ public class Registro_persona extends JFrame {
         restriccion.fill=GridBagConstraints.BOTH;
         container.add(direccion,restriccion);
 
-        JTextField inputdireccion=new JTextField();
+        inputdireccion=new JTextField();
         restriccion.gridx=1;
         restriccion.gridy=3;
         restriccion.gridheight=1;
@@ -118,7 +128,11 @@ public class Registro_persona extends JFrame {
 
     }
     public void enviarDatos(){
-        setVisible(true);
+        this.ventanaOriginal.input_cedula.setText( this.inputcedula.getText() );
+        this.ventanaOriginal.input_nombre.setText( this.inputName.getText() );
+        this.ventanaOriginal.input_calle.setText( this.inputdireccion.getText() );
+        setVisible(false);
+        this.ventanaOriginal.setVisible(true);
         this.dispose();
     }
     public String getnombre(){
