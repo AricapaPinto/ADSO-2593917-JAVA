@@ -430,6 +430,7 @@ public class Factura extends JFrame {
     
             } else {
                 // isntanciamos la ventana de registros
+                this.input_cedula.setText("");
                 Registro_persona ventana = new Registro_persona();
                 String cedula = ventana.getCedula();
                 String nombre = ventana.getName();
