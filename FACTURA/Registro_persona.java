@@ -1,8 +1,5 @@
 import javax.swing.JFrame;
-import javax.print.DocFlavor.STRING;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -10,13 +7,12 @@ public class Registro_persona extends JFrame {
     private JTextField inputName;
     private JTextField inputcedula;
     private JTextField inputdireccion;
-    Persona listaVendedores[];
+    // Persona aregloPersonas[]=new Persona[10];
     Factura ventanaOriginal;
     String cedula;
-
-    public Registro_persona( Factura ventanaOriginal, String cedula ){
-        this.ventanaOriginal = ventanaOriginal;
-        this.cedula = cedula;
+    public Registro_persona(Factura ventanaOriginal,String cedula){
+        this.ventanaOriginal=ventanaOriginal;
+        this.cedula=cedula;
         initComponents();
     }
     public void initComponents(){
@@ -120,6 +116,7 @@ public class Registro_persona extends JFrame {
         ActionListener enviar_datos=new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 enviarDatos();
+                llenarAreglo();
 			}
         };
         btn.addActionListener(enviar_datos);
@@ -127,24 +124,24 @@ public class Registro_persona extends JFrame {
         revalidate();
 
     }
+
+    
     public void enviarDatos(){
-        this.ventanaOriginal.input_cedula.setText( this.inputcedula.getText() );
-        this.ventanaOriginal.input_nombre.setText( this.inputName.getText() );
-        this.ventanaOriginal.input_calle.setText( this.inputdireccion.getText() );
+       
+        // this.ventanaOriginal.input_cedula.setText( this.inputcedula.getText() );
+        // this.ventanaOriginal.input_nombre.setText( this.inputName.getText() );
+        // this.ventanaOriginal.input_calle.setText( this.inputdireccion.getText() );
         setVisible(false);
         this.ventanaOriginal.setVisible(true);
         this.dispose();
     }
-    public String getnombre(){
-        String nombre=inputName.getText();
-        return nombre;
+    public void llenarAreglo(){
+        for (int i = 0; i < ventanaOriginal.aregloPersonas.length; i++) {
+            ventanaOriginal.aregloPersonas[i]=new Persona(this.inputcedula.getText(),this.inputName.getText(),this.inputdireccion.getText());
+        }
     }
-    public String getCedula(){
-        String cedula=inputcedula.getText();
-        return cedula;
-    }
-    public String getdireccion(){
-        String addres=inputdireccion.getText();
-        return addres;
+    public String  convertirString(JTextField input){
+        String texto=input.getText();
+        return texto;
     }
 }

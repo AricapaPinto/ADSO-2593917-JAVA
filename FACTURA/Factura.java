@@ -4,25 +4,32 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.jar.Attributes.Name;
+
 
 public class Factura extends JFrame {
     // atributos
-    private Persona aregloPersonas[];
+    public Persona aregloPersonas[];
     private Persona aregloVendedores[];
+    private Productos listaProductos[];
     public JTextField input_cedula;
     public JTextField input_nombre;
     public JTextField input_calle;
     private JButton buscar;
     private JTextField input_cedula_search;
     private JTextField input_n;
+    private JTextField id;
+    private JTextField nomb;
+    private JTextField canti;
+    private JButton agregar;
+    private JLabel resultado;
 
-    public Factura(Persona aregloPersonas[], Persona aregloVendedores[]) {
-        this.aregloPersonas = aregloPersonas;
+    public Factura(Persona aregloPersonas[], Persona aregloVendedores[], Productos listaProductos[]) {
         this.aregloVendedores = aregloVendedores;
+        this.aregloPersonas = aregloPersonas;
+        this.listaProductos = listaProductos;
         initComponents();
     }
-
+    
     public void initComponents() {
 
         setVisible(true);
@@ -288,7 +295,7 @@ public class Factura extends JFrame {
 
         // primero boton
 
-        JTextField id = new JTextField();
+        id = new JTextField();
         // id.setBorder(BorderFactory.createLineBorder(Color.red,2));
 
         restriccion.gridx = 0;
@@ -300,7 +307,7 @@ public class Factura extends JFrame {
         restriccion.fill = GridBagConstraints.BOTH;
         container.add(id, restriccion);
         // segundo
-        JTextField nomb = new JTextField();
+        nomb = new JTextField();
         // nomb.setBorder(BorderFactory.createLineBorder(Color.red,2));
 
         restriccion.gridx = 1;
@@ -313,7 +320,7 @@ public class Factura extends JFrame {
 
         container.add(nomb, restriccion);
         // tercero
-        JTextField canti = new JTextField();
+        canti = new JTextField();
         // canti.setBorder(BorderFactory.createLineBorder(Color.blue,2));
 
         restriccion.gridx = 2;
@@ -326,7 +333,7 @@ public class Factura extends JFrame {
 
         container.add(canti, restriccion);
 
-        JButton agregar = new JButton("AGREGAR");
+        agregar = new JButton("AGREGAR");
         agregar.setCursor(manito);
         // agregar.setBorder(BorderFactory.createLineBorder(Color.red,2));
         restriccion.gridx = 3;
@@ -346,15 +353,13 @@ public class Factura extends JFrame {
             }
 
             public void mouseExited(MouseEvent e) {
-                agregar.setBackground(UIManager.getColor("Button.background")); // Restaura el color de fondo original
-                                                                                // del botón cuando el usuario retira el
-                                                                                // ratón
+                agregar.setBackground(UIManager.getColor("Button.background")); 
             }
         });
 
         container.add(agregar, restriccion);
 
-        JLabel resultado = new JLabel("----");
+        resultado = new JLabel("----");
         resultado.setHorizontalAlignment(SwingConstants.RIGHT);
         // resultado.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
         resultado.setOpaque(true);
@@ -401,8 +406,58 @@ public class Factura extends JFrame {
             }
         };
         buscar_cedula.addActionListener(buscarVendedor);
-        // this.input_nombre.setEnabled(false);
-        // this.input_calle.setEnabled(false);
+        ActionListener eventoAgregarProductos = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AgregarProducto();
+            }
+        };
+        agregar.addActionListener(eventoAgregarProductos);
+        // actionKeylistener
+        KeyListener eventoKeyBuscarCliente = new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+            }
+
+            public void keyReleased(KeyEvent e) {
+                String texto = input_cedula.getText();
+                if (texto.equalsIgnoreCase("")) {
+                    input_nombre.setText("");
+                    input_calle.setText("");
+                }
+            }
+
+            public void keyTyped(KeyEvent e) {
+            }
+        };
+
+        KeyListener eventoKeyBuscarVendedor = new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+            }
+
+            public void keyReleased(KeyEvent e) {
+                buscarVendedor();
+            }
+
+            public void keyTyped(KeyEvent e) {
+            }
+        };
+        KeyListener buscarProductos = new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+            }
+
+            public void keyReleased(KeyEvent e) {
+                busquedaProductos();
+            }
+
+            public void keyTyped(KeyEvent e) {
+            }
+        };
+        // añadimos el evento a la llave
+        id.addKeyListener(buscarProductos);
+        input_cedula.addKeyListener(eventoKeyBuscarCliente);
+        input_cedula_search.addKeyListener(eventoKeyBuscarVendedor);
+        deshabilitarInput(id);
+        deshabilitarInput(canti);
+        deshabilitarInput(nomb);
         deshabilitarInput(this.input_nombre);
         deshabilitarInput(this.input_calle);
 
@@ -414,12 +469,14 @@ public class Factura extends JFrame {
     public void buscarCliente() {
         boolean encontrado = false;
         String texto = input_cedula.getText();
-        if(!texto.equalsIgnoreCase("")){
+        if (!texto.equalsIgnoreCase("")) {
             for (int i = 0; i < this.aregloPersonas.length; i++) {
                 if (this.aregloPersonas[i] != null && this.aregloPersonas[i].getCedula().equalsIgnoreCase(texto)) {
                     encontrado = true;
                     this.input_nombre.setText(this.aregloPersonas[i].getNombre());
                     this.input_calle.setText(this.aregloPersonas[i].getDireccion());
+                    System.out.println(this.aregloPersonas[i].getNombre());
+                    System.out.println(this.aregloPersonas[i].getDireccion());
                     break;
                 }
             }
@@ -427,20 +484,17 @@ public class Factura extends JFrame {
                 deshabilitarInput(this.input_nombre);
                 deshabilitarInput(input_calle);
                 this.input_cedula_search.requestFocus();
-    
+
             } else {
                 // isntanciamos la ventana de registros
+                // isntanciamos la ventana de registros
                 setVisible(false);
-                Registro_persona ventana = new Registro_persona( this , this.input_cedula.getText() );
+                Registro_persona ventana = new Registro_persona(this, this.input_cedula.getText());
                 this.input_cedula.setText("");
                 
-                // habilitarInput(this.input_nombre);
-                // habilitarInput(this.input_calle);
-                // System.out.print("Eres perfecta");
-                // this.input_nombre.requestFocus();;
             }
         }
-        
+
     }
 
     public void buscarVendedor() {
@@ -454,11 +508,55 @@ public class Factura extends JFrame {
             }
         }
         if (encontrado_vendedor) {
-            System.out.print(" se encontro");
+            // System.out.print(" se encontro");
+            habilitarInput(id);
+            habilitarInput(canti);
             deshabilitarInput(input_n);
+            // agregar.setEnabled(true);
         } else {
-            System.out.print(" no se encontro");
+            // System.out.print(" no se encontro");
+            // agregar.setEnabled(false);
+            deshabilitarInput(id);
+            deshabilitarInput(canti);
             habilitarInput(input_n);
+        }
+    }
+
+    // Busqueda de productos
+    public void busquedaProductos() {
+        String unico = id.getText();
+        boolean encontrado = false;
+        if(!unico.equalsIgnoreCase("")){
+            for (int i = 0; i < listaProductos.length; i++) {
+                if (this.listaProductos[i] != null && this.listaProductos[i].getIdentificador().equalsIgnoreCase(unico)) {
+                    this.nomb.setText(this.listaProductos[i].getName());
+                    encontrado = true;
+                    break;
+                }
+            }
+            if (!encontrado) {
+                this.nomb.setText("No encontrado");
+            }
+        }else{
+            this.nomb.setText("");
+        }
+    }
+
+    public void AgregarProducto() {
+        String textCant=canti.getText();
+        String identificador=id.getText();
+        for (int i = 0; i < listaProductos.length; i++) {
+            if (this.listaProductos[i] != null) {
+                if (this.listaProductos[i].getIdentificador().equalsIgnoreCase(identificador) && !canti.getText().equalsIgnoreCase("") ) {
+                    agregar.setEnabled(true);
+                    int cantidad = Integer.parseInt(textCant);
+                    int valorProducto = this.listaProductos[i].getPrecio() * cantidad;
+                    resultado.setText(resultado.getText() +"\n\n"+ this.listaProductos[i].getIdentificador() + " --- "+ this.listaProductos[i].getName() + " --" + valorProducto+"  \n\n");
+                    revalidate();
+                    
+                    break;
+                }
+            }
         }
     }
 
