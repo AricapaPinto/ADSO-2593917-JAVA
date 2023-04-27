@@ -493,6 +493,9 @@ public class Factura extends JFrame {
                 this.input_cedula.setText("");
                 
             }
+        }else{
+            this.input_nombre.setText("");
+            this.input_calle.setText("");
         }
 
     }

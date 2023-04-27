@@ -127,7 +127,6 @@ public class Registro_persona extends JFrame {
 
     
     public void enviarDatos(){
-       
         // this.ventanaOriginal.input_cedula.setText( this.inputcedula.getText() );
         // this.ventanaOriginal.input_nombre.setText( this.inputName.getText() );
         // this.ventanaOriginal.input_calle.setText( this.inputdireccion.getText() );
@@ -137,7 +136,10 @@ public class Registro_persona extends JFrame {
     }
     public void llenarAreglo(){
         for (int i = 0; i < ventanaOriginal.aregloPersonas.length; i++) {
-            ventanaOriginal.aregloPersonas[i]=new Persona(this.inputcedula.getText(),this.inputName.getText(),this.inputdireccion.getText());
+            if(ventanaOriginal.aregloPersonas[i]==null){
+                ventanaOriginal.aregloPersonas[i]=new Persona(this.inputcedula.getText(),this.inputName.getText(),this.inputdireccion.getText());
+                break;
+            }
         }
     }
     public String  convertirString(JTextField input){
