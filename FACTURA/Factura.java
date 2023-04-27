@@ -1,4 +1,3 @@
-import javax.swing.JFrame;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -21,7 +20,7 @@ public class Factura extends JFrame {
     private JTextField nomb;
     private JTextField canti;
     private JButton agregar;
-    private JLabel resultado;
+    private JPanel resultado;
 
     public Factura(Persona aregloPersonas[], Persona aregloVendedores[], Productos listaProductos[]) {
         this.aregloVendedores = aregloVendedores;
@@ -359,13 +358,10 @@ public class Factura extends JFrame {
 
         container.add(agregar, restriccion);
 
-        resultado = new JLabel("----");
-        resultado.setHorizontalAlignment(SwingConstants.RIGHT);
-        // resultado.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
+        resultado = new JPanel();
+        resultado.setLayout(new BoxLayout(resultado,BoxLayout.Y_AXIS));
         resultado.setOpaque(true);
         resultado.setBackground(Color.white);
-        // resultado.setBorder(BorderFactory.createLineBorder(Color.blue,2));
-
         restriccion.gridx = 0;
         restriccion.gridy = 10;
         restriccion.gridheight = 1;
@@ -554,9 +550,9 @@ public class Factura extends JFrame {
                     agregar.setEnabled(true);
                     int cantidad = Integer.parseInt(textCant);
                     int valorProducto = this.listaProductos[i].getPrecio() * cantidad;
-                    resultado.setText(resultado.getText() +"\n\n"+ this.listaProductos[i].getIdentificador() + " --- "+ this.listaProductos[i].getName() + " --" + valorProducto+"  \n\n");
+                    JLabel temporal=new JLabel(this.listaProductos[i].getIdentificador() + " --- "+ this.listaProductos[i].getName() + " ---" + valorProducto);
+                   resultado.add(temporal);
                     revalidate();
-                    
                     break;
                 }
             }
