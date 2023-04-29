@@ -1,9 +1,9 @@
+import javax.swing.JFrame;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
-
 
 public class Factura extends JFrame {
     // atributos
@@ -20,7 +20,10 @@ public class Factura extends JFrame {
     private JTextField nomb;
     private JTextField canti;
     private JButton agregar;
-    private JPanel resultado;
+    private JLabel resultado;
+    private JLabel Label1;
+    private int totalPagar = 0;
+
 
     public Factura(Persona aregloPersonas[], Persona aregloVendedores[], Productos listaProductos[]) {
         this.aregloVendedores = aregloVendedores;
@@ -28,7 +31,7 @@ public class Factura extends JFrame {
         this.listaProductos = listaProductos;
         initComponents();
     }
-    
+
     public void initComponents() {
 
         setVisible(true);
@@ -352,16 +355,19 @@ public class Factura extends JFrame {
             }
 
             public void mouseExited(MouseEvent e) {
-                agregar.setBackground(UIManager.getColor("Button.background")); 
+                agregar.setBackground(UIManager.getColor("Button.background"));
             }
         });
 
         container.add(agregar, restriccion);
 
-        resultado = new JPanel();
-        resultado.setLayout(new BoxLayout(resultado,BoxLayout.Y_AXIS));
+        resultado = new JLabel("----");
+        resultado.setHorizontalAlignment(SwingConstants.RIGHT);
+        // resultado.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
         resultado.setOpaque(true);
         resultado.setBackground(Color.white);
+        // resultado.setBorder(BorderFactory.createLineBorder(Color.blue,2));
+
         restriccion.gridx = 0;
         restriccion.gridy = 10;
         restriccion.gridheight = 1;
@@ -371,7 +377,7 @@ public class Factura extends JFrame {
         restriccion.fill = GridBagConstraints.BOTH;
         container.add(resultado, restriccion);
 
-        JLabel Label1 = new JLabel("TOTAL: $ 0");
+        Label1 = new JLabel("TOTAL: $ 0");
         Label1.setHorizontalAlignment(SwingConstants.RIGHT);
         Border borde = new EmptyBorder(10, 10, 10, 10);
         Label1.setBorder(borde);
@@ -487,11 +493,8 @@ public class Factura extends JFrame {
                 setVisible(false);
                 Registro_persona ventana = new Registro_persona(this, this.input_cedula.getText());
                 this.input_cedula.setText("");
-                
+
             }
-        }else{
-            this.input_nombre.setText("");
-            this.input_calle.setText("");
         }
 
     }
@@ -525,9 +528,10 @@ public class Factura extends JFrame {
     public void busquedaProductos() {
         String unico = id.getText();
         boolean encontrado = false;
-        if(!unico.equalsIgnoreCase("")){
+        if (!unico.equalsIgnoreCase("")) {
             for (int i = 0; i < listaProductos.length; i++) {
-                if (this.listaProductos[i] != null && this.listaProductos[i].getIdentificador().equalsIgnoreCase(unico)) {
+                if (this.listaProductos[i] != null
+                        && this.listaProductos[i].getIdentificador().equalsIgnoreCase(unico)) {
                     this.nomb.setText(this.listaProductos[i].getName());
                     encontrado = true;
                     break;
@@ -536,27 +540,33 @@ public class Factura extends JFrame {
             if (!encontrado) {
                 this.nomb.setText("No encontrado");
             }
-        }else{
+        } else {
             this.nomb.setText("");
         }
     }
 
     public void AgregarProducto() {
-        String textCant=canti.getText();
-        String identificador=id.getText();
+        String textCant = canti.getText();
+        String identificador = id.getText();
+        int valorProducto=0;
         for (int i = 0; i < listaProductos.length; i++) {
             if (this.listaProductos[i] != null) {
-                if (this.listaProductos[i].getIdentificador().equalsIgnoreCase(identificador) && !canti.getText().equalsIgnoreCase("") ) {
+                if (this.listaProductos[i].getIdentificador().equalsIgnoreCase(identificador)
+                        && !canti.getText().equalsIgnoreCase("")) {
                     agregar.setEnabled(true);
                     int cantidad = Integer.parseInt(textCant);
-                    int valorProducto = this.listaProductos[i].getPrecio() * cantidad;
-                    JLabel temporal=new JLabel(this.listaProductos[i].getIdentificador() + " --- "+ this.listaProductos[i].getName() + " ---" + valorProducto);
-                   resultado.add(temporal);
+                    valorProducto = this.listaProductos[i].getPrecio() * cantidad;
+                    resultado.setText(resultado.getText() + "\n\n" + this.listaProductos[i].getIdentificador() + " --- "
+                            + this.listaProductos[i].getName() + " --" + valorProducto + "  \n\n");
+                    // agregamo el valor final de todos los productos comprados
                     revalidate();
                     break;
                 }
             }
         }
+        totalPagar = totalPagar+valorProducto;
+        System.out.print(totalPagar);
+        Label1.setText("TOTAL $: "+Integer.toString(totalPagar));
     }
 
     public void deshabilitarInput(JTextField input) {
