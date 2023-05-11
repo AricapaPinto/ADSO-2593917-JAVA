@@ -146,6 +146,7 @@ public class Tres_en_raya extends JFrame {
             return false;
         }
     }
+
     public boolean tablerolleno() {
         for (int i = 0; i < tablero.length; i++) {
             if (this.tablero[i].getText() == "-") {
@@ -155,73 +156,165 @@ public class Tres_en_raya extends JFrame {
         return true;
         // return false;
     }
+
     // Buscar una jugada para bloquear al jugador y ganar tambien
     public boolean verificarGanador(String jugador) {
         // Comprobar las filas
         for (int i = 0; i < TAM_TABLERO; i += 3) {
-            if (tablero[i].getText().equals(jugador) && tablero[i + 1].getText().equals(jugador) && tablero[i + 2].getText().equals(jugador)) {
+            if (tablero[i].getText().equals(jugador) && tablero[i + 1].getText().equals(jugador)
+                    && tablero[i + 2].getText().equals(jugador)) {
                 return true;
             }
         }
-    
+
         // Comprobar las columnas
         for (int i = 0; i < 3; i++) {
-            if (tablero[i].getText().equals(jugador) && tablero[i + 3].getText().equals(jugador) && tablero[i + 6].getText().equals(jugador)) {
+            if (tablero[i].getText().equals(jugador) && tablero[i + 3].getText().equals(jugador)
+                    && tablero[i + 6].getText().equals(jugador)) {
                 return true;
             }
         }
-    
+
         // Comprobar las diagonales
-        if (tablero[0].getText().equals(jugador) && tablero[4].getText().equals(jugador) && tablero[8].getText().equals(jugador)) {
+        if (tablero[0].getText().equals(jugador) && tablero[4].getText().equals(jugador)
+                && tablero[8].getText().equals(jugador)) {
             return true;
         }
-        if (tablero[2].getText().equals(jugador) && tablero[4].getText().equals(jugador) && tablero[6].getText().equals(jugador)) {
+        if (tablero[2].getText().equals(jugador) && tablero[4].getText().equals(jugador)
+                && tablero[6].getText().equals(jugador)) {
             return true;
         }
-    
+
         // Si no hay ganador, devolver false
         return false;
     }
+
     public int movimientoMaquina() {
-        // Buscar una jugada ganadora para la máquina
+        if (tablero[4].getText().equals(VACIO)) {
+            return 4;
+        } else if (tablero[0].getText().equals(JUGADOR_X) && tablero[4].getText().equals(JUGADOR_O)
+                && tablero[8].getText().equals(JUGADOR_X)) {
+            if (tablero[3].getText().equals(VACIO)) {
+                System.out.print("Entre aqui porque me lo pediste  1");
+                return 3;
+            }
+        } else if (tablero[2].getText().equals(JUGADOR_X) && tablero[4].getText().equals(JUGADOR_O)
+                && tablero[6].getText().equals(JUGADOR_X)) {
+            if (tablero[5].getText().equals(VACIO)) {
+
+                System.out.print("Entre aqui porque me lo pediste 2");
+                return 5;
+            }
+        }
+        if (tablero[2].getText().equals(JUGADOR_X) && tablero[4].getText().equals(JUGADOR_O)
+                && tablero[7].getText().equals(JUGADOR_X)) {
+            if (tablero[5].getText().equals(VACIO)) {
+                System.out.print("Entre aqui porque me lo pediste 3");
+                return 5;
+            }
+        }
+        if (tablero[0].getText().equals(JUGADOR_X) && tablero[4].getText().equals(JUGADOR_O)
+                && tablero[7].getText().equals(JUGADOR_X)) {
+            if (tablero[3].getText().equals(VACIO)) {
+                System.out.print("Entre aqui porque me lo pediste 4");
+                return 3;
+            }
+        }
+        if (tablero[8].getText().equals(JUGADOR_X) && tablero[4].getText().equals(JUGADOR_O)
+                && tablero[1].getText().equals(JUGADOR_X)) {
+            if (tablero[5].getText().equals(VACIO)) {
+                System.out.print("Entre aqui porque me lo pediste 5");
+                return 5;
+            }
+        }
+        if (tablero[6].getText().equals(JUGADOR_X) && tablero[4].getText().equals(JUGADOR_O)
+                && tablero[1].getText().equals(JUGADOR_X)) {
+            if (tablero[3].getText().equals(VACIO)) {
+                System.out.print("Entre aqui porque me lo pediste 6");
+                return 3;
+            }
+        }
+        // seguimos con las jugadas que pueden ser ganadas
+
+        if (tablero[4].getText().equalsIgnoreCase(JUGADOR_X)) {
+            int aleatorio = 0;
+            int[] arreglo = { 2, 0, 6, 8 };
+            boolean todasVacias = true;
+            for (int i = 0; i < tablero.length; i++) {
+                if (i != 4 && !tablero[i].getText().equalsIgnoreCase(VACIO)) {
+                    todasVacias = false;
+                    break;
+                }
+            }
+            if (todasVacias) {
+                aleatorio = (int) (Math.random() * arreglo.length);
+                System.out.println("Solo Entro aqui una vez xd" + arreglo[aleatorio]);
+                return arreglo[aleatorio];
+            }
+        }
+        // validamos que si hay dos x en la posicion 1 y 7 entonces haga esto
+        if ((tablero[1].getText().equalsIgnoreCase(JUGADOR_X) && tablero[7].getText().equalsIgnoreCase(JUGADOR_X)
+                && tablero[4].getText().equalsIgnoreCase(JUGADOR_O)) ||
+                (tablero[1].getText().equalsIgnoreCase(JUGADOR_O) && tablero[7].getText().equalsIgnoreCase(JUGADOR_O)
+                        && tablero[4].getText().equalsIgnoreCase(JUGADOR_X))) {
+
+            int aleatorio = 0;
+            int[] arreglo = { 3, 5 };
+            boolean todasVacias = true;
+
+            for (int i = 0; i < tablero.length; i++) {
+                if (i != 1 && i != 4 && i != 7 && !tablero[i].getText().equalsIgnoreCase(VACIO)) {
+                    aleatorio = (int) (Math.random() * arreglo.length);
+                    todasVacias = false;
+                    break;
+                }
+            }
+
+            if (todasVacias) {
+                aleatorio = (int) (Math.random() * arreglo.length);
+                return arreglo[aleatorio];
+            }
+        }
+
         for (int i = 0; i < TAM_TABLERO; i++) {
             if (tablero[i].getText().equals(VACIO)) {
                 tablero[i].setText(JUGADOR_O);
                 if (verificarGanador(JUGADOR_O)) {
+                    System.out.println("Entro aqui 2");
                     return i;
                 }
                 tablero[i].setText(VACIO);
             }
         }
-
         // Buscar una jugada para bloquear al jugador
         for (int i = 0; i < TAM_TABLERO; i++) {
             if (tablero[i].getText().equals(VACIO)) {
                 tablero[i].setText(JUGADOR_X);
                 if (verificarGanador(JUGADOR_X)) {
                     tablero[i].setText(JUGADOR_O);
+                    System.out.println("Entro aqui 1");
                     return i;
                 }
                 tablero[i].setText(VACIO);
             }
         }
-
-        // Buscar una jugada para que la máquina gane
-        for (int i = 0; i < TAM_TABLERO; i++) {
-            if (tablero[i].getText().equals(VACIO)) {
-                tablero[i].setText(JUGADOR_O);
-                if (verificarGanador(JUGADOR_O)) {
-                    return i;
-                }
-                tablero[i].setText(VACIO);
-            }
-        }
+        // // Buscar una jugada para que la máquina gane
+        // for (int i = 0; i < TAM_TABLERO; i++) {
+        // if (tablero[i].getText().equals(VACIO)) {
+        // tablero[i].setText(JUGADOR_O);
+        // if (verificarGanador(JUGADOR_O)) {
+        // System.out.println("Entro aqui 3");
+        // return i;
+        // }
+        // tablero[i].setText(VACIO);
+        // }
+        // }
 
         // Si no se encontró ninguna jugada ganadora o para bloquear al jugador,
         // realizar un movimiento aleatorio
         int posicion;
         do {
-            posicion = (int) (Math.random() * TAM_TABLERO);
+            posicion = (int) (Math.random() * tablero.length);
         } while (!tablero[posicion].getText().equals(VACIO));
         tablero[posicion].setText(JUGADOR_O);
         return posicion;
