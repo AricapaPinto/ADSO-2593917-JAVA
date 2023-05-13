@@ -234,6 +234,22 @@ public class Tres_en_raya extends JFrame {
                 return 3;
             }
         }
+        if (tablero[1].getText().equals(JUGADOR_X) && tablero[5].getText().equals(JUGADOR_X)
+                && tablero[2].getText().equals(VACIO)) {
+            return 2;
+        }
+        if (tablero[1].getText().equals(JUGADOR_X) && tablero[3].getText().equals(JUGADOR_X)
+                && tablero[0].getText().equals(VACIO)) {
+            return 0;
+        }
+        if (tablero[7].getText().equals(JUGADOR_X) && tablero[5].getText().equals(JUGADOR_X)
+                && tablero[8].getText().equals(VACIO)) {
+            return 8;
+        }
+        if (tablero[7].getText().equals(JUGADOR_X) && tablero[3].getText().equals(JUGADOR_X)
+                && tablero[6].getText().equals(VACIO)) {
+            return 6;
+        }
         // seguimos con las jugadas que pueden ser ganadas
 
         if (tablero[4].getText().equalsIgnoreCase(JUGADOR_X)) {
@@ -269,7 +285,6 @@ public class Tres_en_raya extends JFrame {
                     break;
                 }
             }
-
             if (todasVacias) {
                 aleatorio = (int) (Math.random() * arreglo.length);
                 return arreglo[aleatorio];
