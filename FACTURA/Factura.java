@@ -418,7 +418,7 @@ public class Factura extends JFrame {
         KeyListener eventoKeyBuscarCliente = new KeyListener() {
             public void keyPressed(KeyEvent e) {
             }
-
+            
             public void keyReleased(KeyEvent e) {
                 String texto = input_cedula.getText();
                 if (texto.equalsIgnoreCase("")) {
@@ -434,7 +434,7 @@ public class Factura extends JFrame {
         KeyListener eventoKeyBuscarVendedor = new KeyListener() {
             public void keyPressed(KeyEvent e) {
             }
-
+            
             public void keyReleased(KeyEvent e) {
                 buscarVendedor();
             }
@@ -445,7 +445,7 @@ public class Factura extends JFrame {
         KeyListener buscarProductos = new KeyListener() {
             public void keyPressed(KeyEvent e) {
             }
-
+            
             public void keyReleased(KeyEvent e) {
                 busquedaProductos();
             }
@@ -544,6 +544,13 @@ public class Factura extends JFrame {
             this.nomb.setText("");
         }
     }
+
+
+
+
+
+
+
 
     public void AgregarProducto() {
         String textCant = canti.getText();

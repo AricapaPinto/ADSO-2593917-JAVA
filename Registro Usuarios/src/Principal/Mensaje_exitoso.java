@@ -18,11 +18,13 @@ public class Mensaje_exitoso extends javax.swing.JFrame {
         btn_aceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
         confirmacion.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         confirmacion.setForeground(new java.awt.Color(255, 255, 0));
+        confirmacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         confirmacion.setText("MODIFICADO CON EXITO");
 
         btn_aceptar.setBackground(new java.awt.Color(255, 255, 255));

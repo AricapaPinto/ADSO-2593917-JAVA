@@ -30,6 +30,7 @@ public class Menu extends JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
+        setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 51, 51));
         setLocation(new java.awt.Point(0, 0));
         setResizable(false);
@@ -152,11 +153,14 @@ public class Menu extends JFrame {
                 System.out.println(i+" => "+this.listaPersonas[i].getCedula()+" - "+this.listaPersonas[i].getNombres()+" "+this.listaPersonas[i].getApellidos() );
             }
         }
+        
+        setVisible(false);
+        Personas_registradas ventana =new Personas_registradas(this);
+        ventana.setVisible(true);
     }//GEN-LAST:event_btnListarUsuariosActionPerformed
 
     private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
         setVisible(false);
-        
         CrearUsuario ventana = new CrearUsuario(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_btnCrearUsuarioActionPerformed

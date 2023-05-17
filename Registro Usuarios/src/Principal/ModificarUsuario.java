@@ -41,6 +41,7 @@ public class ModificarUsuario extends javax.swing.JFrame {
         informacion_encontrado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
 
         contentTitulo.setBackground(new java.awt.Color(0, 0, 102));
 
