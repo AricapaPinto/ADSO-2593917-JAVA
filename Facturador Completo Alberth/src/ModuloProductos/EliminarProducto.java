@@ -1,21 +1,22 @@
-package ModuloUsuarios;
+package ModuloProductos;
+
 
 import java.awt.*;
 import java.awt.event.*;
-import Clases.Persona;
+import Clases.Productos;
 import Principal.Menu;
 import javax.swing.*;
 
-public class EliminarUsuario extends javax.swing.JFrame {
+public class EliminarProducto extends javax.swing.JFrame {
 
     // Creamomos la instancia de la ventana de menu 
     Menu ventMenu;
-    Persona listapersonas[];
+    Productos listaProductos[];
     String titulo;
 
-    public EliminarUsuario(Menu ventMenu, Persona listaPersonas[], String titulo) {
+    public EliminarProducto(Menu ventMenu, Productos listaProductos[]) {
         this.ventMenu = ventMenu;
-        this.listapersonas = listaPersonas;
+        this.listaProductos = listaProductos;
         this.titulo = titulo;
         initComponents();
         initAlternComponents();
@@ -25,12 +26,13 @@ public class EliminarUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jProgressBar1 = new javax.swing.JProgressBar();
         jPanel1 = new javax.swing.JPanel();
         etqEliminar = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        BuscarClienteEliminar = new javax.swing.JButton();
-        inputEliminarUsuario = new javax.swing.JTextField();
+        id_p = new javax.swing.JLabel();
+        BuscarProducto = new javax.swing.JButton();
+        inputEliminarProducto = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         label_encontrado = new javax.swing.JLabel();
         labelNombres = new javax.swing.JLabel();
@@ -38,15 +40,16 @@ public class EliminarUsuario extends javax.swing.JFrame {
         labelTelefono = new javax.swing.JLabel();
         labelDireccion = new javax.swing.JLabel();
         labelEmail = new javax.swing.JLabel();
-        inputNombres = new javax.swing.JTextField();
-        inputApellidos = new javax.swing.JTextField();
-        inputTelefono = new javax.swing.JTextField();
-        inputDireccion = new javax.swing.JTextField();
-        inputCorreo = new javax.swing.JTextField();
+        inputIdentificador = new javax.swing.JTextField();
+        inputNombre = new javax.swing.JTextField();
+        inputPrecio = new javax.swing.JTextField();
+        inputCantidad = new javax.swing.JTextField();
+        inputFecha = new javax.swing.JTextField();
         btn_cancelar = new javax.swing.JButton();
         btn_eliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Eliminar Producto");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 102));
@@ -54,7 +57,7 @@ public class EliminarUsuario extends javax.swing.JFrame {
         etqEliminar.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         etqEliminar.setForeground(new java.awt.Color(255, 255, 255));
         etqEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        etqEliminar.setText("ELIMINAR USUARIO");
+        etqEliminar.setText("ELIMINAR PRODUCTO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -75,15 +78,15 @@ public class EliminarUsuario extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel2.setText("Cedula:");
+        id_p.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        id_p.setText("ID P:");
 
-        BuscarClienteEliminar.setBackground(new java.awt.Color(0, 0, 102));
-        BuscarClienteEliminar.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        BuscarClienteEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        BuscarClienteEliminar.setText("Buscar");
+        BuscarProducto.setBackground(new java.awt.Color(0, 0, 102));
+        BuscarProducto.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        BuscarProducto.setForeground(new java.awt.Color(255, 255, 255));
+        BuscarProducto.setText("Buscar");
 
-        inputEliminarUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        inputEliminarProducto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -91,11 +94,11 @@ public class EliminarUsuario extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(id_p)
                 .addGap(18, 18, 18)
-                .addComponent(inputEliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BuscarClienteEliminar)
+                .addComponent(BuscarProducto)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -103,9 +106,9 @@ public class EliminarUsuario extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(inputEliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BuscarClienteEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id_p)
+                    .addComponent(inputEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -114,29 +117,29 @@ public class EliminarUsuario extends javax.swing.JFrame {
         label_encontrado.setText("Usuario :");
 
         labelNombres.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        labelNombres.setText("Nombres:");
+        labelNombres.setText("ID:");
 
         labelApellidos.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        labelApellidos.setText("Apellidos");
+        labelApellidos.setText("Nombre:");
 
         labelTelefono.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        labelTelefono.setText("Telefono:");
+        labelTelefono.setText("    Precio:");
 
         labelDireccion.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        labelDireccion.setText("Direccion:");
+        labelDireccion.setText("    Cantidad:");
 
         labelEmail.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        labelEmail.setText("Email:");
+        labelEmail.setText("    Fecha:");
 
-        inputNombres.setBackground(new java.awt.Color(255, 255, 255));
+        inputIdentificador.setBackground(new java.awt.Color(255, 255, 255));
 
-        inputApellidos.setBackground(new java.awt.Color(255, 255, 255));
+        inputNombre.setBackground(new java.awt.Color(255, 255, 255));
 
-        inputTelefono.setBackground(new java.awt.Color(255, 255, 255));
+        inputPrecio.setBackground(new java.awt.Color(255, 255, 255));
 
-        inputDireccion.setBackground(new java.awt.Color(255, 255, 255));
+        inputCantidad.setBackground(new java.awt.Color(255, 255, 255));
 
-        inputCorreo.setBackground(new java.awt.Color(255, 255, 255));
+        inputFecha.setBackground(new java.awt.Color(255, 255, 255));
 
         btn_cancelar.setBackground(new java.awt.Color(102, 102, 102));
         btn_cancelar.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -168,29 +171,32 @@ public class EliminarUsuario extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(label_encontrado)
                                 .addGap(48, 48, 48))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labelApellidos)
-                                .addComponent(labelNombres))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(labelNombres)
+                                .addGap(62, 62, 62))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(labelDireccion)
                                 .addComponent(labelTelefono)
                                 .addComponent(labelEmail))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
-                        .addComponent(btn_cancelar)))
+                        .addComponent(btn_cancelar))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(labelApellidos)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(btn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputIdentificador, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(57, 57, 57))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -205,26 +211,26 @@ public class EliminarUsuario extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelApellidos)
-                            .addComponent(inputApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelTelefono)
-                            .addComponent(inputTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelDireccion)
-                            .addComponent(inputDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelEmail)
-                            .addComponent(inputCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_cancelar)
                             .addComponent(btn_eliminar))
                         .addGap(33, 33, 33))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(inputNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputIdentificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -253,17 +259,10 @@ public class EliminarUsuario extends javax.swing.JFrame {
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
         //agregamos una condicion 
-        if (!this.inputNombres.getText().equals("") && !this.inputApellidos.getText().equals("") && !this.inputTelefono.getText().equals("") && !this.inputDireccion.getText().equals("") && !this.inputCorreo.getText().equals("")) {
+        if (!this.inputIdentificador.getText().equals("") && !this.inputNombre.getText().equals("") && !this.inputPrecio.getText().equals("") && !this.inputCantidad.getText().equals("") && !this.inputFecha.getText().equals("")) {
             int eliminar = getObtenerPosicion();
-            for (int i = eliminar; i < listapersonas.length - 1; i++) {
-                this.listapersonas[i] = this.listapersonas[i + 1];
-                if (this.titulo.equals("CLIENTE")) {
-                    this.ventMenu.indexClientes--;
-                    break;
-                } else if (this.titulo.equals("VENDEDOR")) {
-                    this.ventMenu.indexVendedores--;
-                    break;
-                }
+            for (int i = eliminar; i < listaProductos.length - 1; i++) {
+                this.listaProductos[i] = this.listaProductos[i + 1];
             }
             //aqui se destruye una vez guarde los cambios
 
@@ -274,24 +273,24 @@ public class EliminarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
     public void initAlternComponents() {
-        this.etqEliminar.setText("ELIMINAR " + this.titulo);
+        
         setLocationRelativeTo(null);
         setIconImage(getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_almacenes.png")));
 
         //agregamos el metodo a el evento del boton de buscar 
-        ActionListener buscadorCliente = new ActionListener() {
+        ActionListener buscadorProducto = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                buscarCliente();
+                buscarProducto();
             }
         };
 
-        BuscarClienteEliminar.addActionListener(buscadorCliente);
+        BuscarProducto.addActionListener(buscadorProducto);
 
-        this.deshabilitarInput(inputNombres);
-        this.deshabilitarInput(inputApellidos);
-        this.deshabilitarInput(inputTelefono);
-        this.deshabilitarInput(inputDireccion);
-        this.deshabilitarInput(inputCorreo);
+        this.deshabilitarInput(inputIdentificador);
+        this.deshabilitarInput(inputNombre);
+        this.deshabilitarInput(inputPrecio);
+        this.deshabilitarInput(inputCantidad);
+        this.deshabilitarInput(inputFecha);
 
         //agregamos un evento en el caso que quiera eliminar el usuario 
         KeyListener eventoKeyBuscarCliente;
@@ -301,7 +300,7 @@ public class EliminarUsuario extends javax.swing.JFrame {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                String texto = inputEliminarUsuario.getText();
+                String texto = inputEliminarProducto.getText();
                 if (texto.equalsIgnoreCase("")) {
                     limpiarInput();
                 }
@@ -311,50 +310,50 @@ public class EliminarUsuario extends javax.swing.JFrame {
             public void keyTyped(KeyEvent e) {
             }
         };
-        inputEliminarUsuario.addKeyListener(eventoKeyBuscarCliente);
+        inputEliminarProducto.addKeyListener(eventoKeyBuscarCliente);
     }
 
-    public void buscarCliente() {
+    public void buscarProducto() {
 
-        if (!inputEliminarUsuario.getText().equals("")) {
+        if (!inputEliminarProducto.getText().equals("")) {
             System.out.println("EL input se encuentra lleno");
             boolean encontrado = false;
-            String cedula_ingresada = inputEliminarUsuario.getText();
-            System.out.println("=>" + cedula_ingresada);
+            String producto_ingresado = inputEliminarProducto.getText();
+            System.out.println("=>" + producto_ingresado);
 
-            for (int i = 0; i < listapersonas.length; i++) {
-                if (this.listapersonas[i] != null && this.listapersonas[i].getCedula().equals(cedula_ingresada)) {
-                    this.label_encontrado.setText("Usuario encontrado :" + this.listapersonas[i].getNombres());
-                    System.out.println("Cedula=>" + this.listapersonas[i].getCedula() + i);
+            for (int i = 0; i < listaProductos.length; i++) {
+                if (this.listaProductos[i] != null && this.listaProductos[i].getIdentificador().equals(producto_ingresado)) {
+                    this.label_encontrado.setText("Usuario encontrado :" + this.listaProductos[i].getIdentificador());
+                    System.out.println("Cedula=>" + this.listaProductos[i].getIdentificador()+ i);
                     encontrado = true;
 
                   
-                    this.inputNombres.setText(this.listapersonas[i].getNombres());
-                    this.inputApellidos.setText(this.listapersonas[i].getApellidos());
-                    this.inputTelefono.setText(this.listapersonas[i].getTelefono());
-                    this.inputDireccion.setText(this.listapersonas[i].getDireccion());
-                    this.inputCorreo.setText(this.listapersonas[i].getEmail());
+                    this.inputIdentificador.setText(this.listaProductos[i].getIdentificador());
+                    this.inputNombre.setText(this.listaProductos[i].getName());
+                    this.inputPrecio.setText(this.listaProductos[i].getPrecio());
+                    this.inputCantidad.setText(this.listaProductos[i].getcantidad());
+                    this.inputFecha.setText(this.listaProductos[i].getfecha());
                     setObtenerPosicion(i);
                     break;
                 }
             }
             if (encontrado == false) {
-                this.label_encontrado.setText("Usuario NO encontrado :");
-                System.out.println("El usuario no se encuentra");
+                this.label_encontrado.setText("Identificador no encontrado:");
+                System.out.println("El Identificador del producto no se encuentra");
             }
         } else {
-            this.label_encontrado.setText("Usuario :");
+            this.label_encontrado.setText("Identificador :");
             System.out.print("EL input se encuentra Vacio");
 
         }
     }
 
     public void limpiarInput() {
-        this.inputNombres.setText("");
-        this.inputApellidos.setText("");
-        this.inputTelefono.setText("");
-        this.inputDireccion.setText("");
-        this.inputCorreo.setText("");
+        this.inputIdentificador.setText("");
+        this.inputNombre.setText("");
+        this.inputPrecio.setText("");
+        this.inputCantidad.setText("");
+        this.inputFecha.setText("");
     }
     int posicion;
 
@@ -377,20 +376,21 @@ public class EliminarUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BuscarClienteEliminar;
+    private javax.swing.JButton BuscarProducto;
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_eliminar;
     private javax.swing.JLabel etqEliminar;
-    private javax.swing.JTextField inputApellidos;
-    private javax.swing.JTextField inputCorreo;
-    private javax.swing.JTextField inputDireccion;
-    private javax.swing.JTextField inputEliminarUsuario;
-    private javax.swing.JTextField inputNombres;
-    private javax.swing.JTextField inputTelefono;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel id_p;
+    private javax.swing.JTextField inputCantidad;
+    private javax.swing.JTextField inputEliminarProducto;
+    private javax.swing.JTextField inputFecha;
+    private javax.swing.JTextField inputIdentificador;
+    private javax.swing.JTextField inputNombre;
+    private javax.swing.JTextField inputPrecio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel labelApellidos;
     private javax.swing.JLabel labelDireccion;
     private javax.swing.JLabel labelEmail;
