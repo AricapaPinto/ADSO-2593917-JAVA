@@ -11,6 +11,7 @@ public class Menu extends JFrame {
     public Productos listaProductos[];
     public Persona listaClientes[];
     public Persona listaVendedores[];
+    public ListaFacturas Facturas[];
     public int indexClientes;
     public int indexVendedores;
 
@@ -18,6 +19,7 @@ public class Menu extends JFrame {
         this.listaClientes = new Persona[100];
         this.listaVendedores = new Persona[100];
         this.listaProductos = new Productos[100];
+        this.Facturas = new ListaFacturas[100];
         this.indexClientes = 0;
         this.indexVendedores = 0;
 
@@ -52,7 +54,6 @@ public class Menu extends JFrame {
         etiquetaCliente2 = new javax.swing.JLabel();
         contentVendedores2 = new javax.swing.JPanel();
         btnCrearFactura = new javax.swing.JButton();
-        btnModificarFactura = new javax.swing.JButton();
         btnlistarProductos = new javax.swing.JButton();
         etiquetaCliente3 = new javax.swing.JLabel();
 
@@ -333,17 +334,16 @@ public class Menu extends JFrame {
             }
         });
 
-        btnModificarFactura.setBackground(new java.awt.Color(0, 0, 153));
-        btnModificarFactura.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
-        btnModificarFactura.setForeground(new java.awt.Color(255, 255, 255));
-        btnModificarFactura.setText("Modificar");
-        btnModificarFactura.setFocusable(false);
-
         btnlistarProductos.setBackground(new java.awt.Color(0, 0, 153));
         btnlistarProductos.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
         btnlistarProductos.setForeground(new java.awt.Color(255, 255, 255));
         btnlistarProductos.setText("Listar ");
         btnlistarProductos.setFocusable(false);
+        btnlistarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlistarProductosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout contentVendedores2Layout = new javax.swing.GroupLayout(contentVendedores2);
         contentVendedores2.setLayout(contentVendedores2Layout);
@@ -353,20 +353,17 @@ public class Menu extends JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(contentVendedores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnlistarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificarFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCrearFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         contentVendedores2Layout.setVerticalGroup(
             contentVendedores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentVendedores2Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCrearFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnModificarFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnlistarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11))
+                .addGap(70, 70, 70))
         );
 
         etiquetaCliente3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -430,8 +427,8 @@ public class Menu extends JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(etiquetaCliente1)
                 .addGap(18, 18, 18)
-                .addComponent(contentVendedores2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addComponent(contentVendedores2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(161, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -533,16 +530,23 @@ public class Menu extends JFrame {
 
     private void btnListarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarProductoActionPerformed
         setVisible(false);
-        ListarProductos ventana = new ListarProductos (this, this.listaProductos);
+        ListarProductos ventana = new ListarProductos(this, this.listaProductos);
         ventana.setVisible(true);
     }//GEN-LAST:event_btnListarProductoActionPerformed
 
     //aqui es para crear la factura
     private void btnCrearFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearFacturaActionPerformed
         setVisible(false);
-        Factura ventana_F=new Factura(this,this.listaProductos,this.listaClientes,this.listaVendedores);
+        Factura ventana_F = new Factura(this, this.listaProductos, this.listaClientes, this.listaVendedores,this.Facturas);
         ventana_F.setVisible(true);
     }//GEN-LAST:event_btnCrearFacturaActionPerformed
+
+    // aqui va lo de listar facuras en especifica
+    private void btnlistarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlistarProductosActionPerformed
+        setVisible(false);
+        ListarFactura ventana = new ListarFactura(this,this.Facturas);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_btnlistarProductosActionPerformed
 
     public void initAlternComponents() {
         setLocationRelativeTo(null);
@@ -573,7 +577,6 @@ public class Menu extends JFrame {
     private javax.swing.JButton btnListarProducto;
     private javax.swing.JButton btnListarVendedores;
     private javax.swing.JButton btnModificarCliente;
-    private javax.swing.JButton btnModificarFactura;
     private javax.swing.JButton btnModificarProducto;
     private javax.swing.JButton btnModificarVendedor;
     private javax.swing.JButton btnlistarProductos;

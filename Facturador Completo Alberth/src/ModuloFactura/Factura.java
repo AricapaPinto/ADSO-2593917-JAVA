@@ -13,14 +13,17 @@ public class Factura extends javax.swing.JFrame {
     Productos listaProductos[];
     Persona listaPersonas[];
     Persona listaVendedores[];
+    ListaFacturas facturas[];
     int totalPagar = 0;
     // esto es lo que nesecita la ventana de factura para hacer la factura
 
-    public Factura(Menu ventanaMenu, Productos listaProductos[], Persona listaPersonas[], Persona listaVendedores[]) {
+    public Factura(Menu ventanaMenu, Productos listaProductos[], Persona listaPersonas[], Persona listaVendedores[], ListaFacturas facturas[]) {
         this.ventanaMenu = ventanaMenu;
         this.listaPersonas = listaPersonas;
         this.listaProductos = listaProductos;
         this.listaVendedores = listaVendedores;
+        this.facturas = facturas;
+
         initComponents();
         initAlternComponents();
     }
@@ -38,14 +41,14 @@ public class Factura extends javax.swing.JFrame {
         };
 
         this.buscadorCedula.addActionListener(buscadorCliente);
-        
+
         ActionListener buscarVendedor = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 buscarVendedor();
             }
         };
         this.cedulaVen.addActionListener(buscarVendedor);
-        
+
         ActionListener eventoAgregarProductos = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 AgregarProducto();
@@ -129,6 +132,8 @@ public class Factura extends javax.swing.JFrame {
                 encontrado_vendedor = true;
                 this.nombreVendedor.setText(listaVendedores[i].getNombres());
                 break;
+            } else {
+                this.nombreVendedor.setText("Usuario No encontrado");
             }
         }
         if (encontrado_vendedor) {
@@ -233,7 +238,7 @@ public class Factura extends javax.swing.JFrame {
         Compra = new javax.swing.JPanel();
         resultado = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        Guardar = new javax.swing.JButton();
+        btn_cancelar = new javax.swing.JButton();
         Guardar1 = new javax.swing.JButton();
         total = new javax.swing.JLabel();
         cedulaVen = new javax.swing.JButton();
@@ -321,16 +326,21 @@ public class Factura extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(Compra);
 
-        Guardar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Guardar.setText("CANCELAR");
-        Guardar.addActionListener(new java.awt.event.ActionListener() {
+        btn_cancelar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_cancelar.setText("CANCELAR");
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarActionPerformed(evt);
+                btn_cancelarActionPerformed(evt);
             }
         });
 
         Guardar1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Guardar1.setText("GUARDAR");
+        Guardar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Guardar1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -338,25 +348,19 @@ public class Factura extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(Guardar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(352, Short.MAX_VALUE)
-                    .addComponent(Guardar1)
-                    .addGap(16, 16, 16)))
+                .addComponent(btn_cancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Guardar1)
+                .addGap(27, 27, 27))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Guardar)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_cancelar)
+                    .addComponent(Guardar1))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(Guardar1)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         total.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -506,16 +510,48 @@ public class Factura extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         this.ventanaMenu.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_GuardarActionPerformed
+    }//GEN-LAST:event_btn_cancelarActionPerformed
+
+    private void Guardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Guardar1ActionPerformed
+        if (!inputCedula.getText().equalsIgnoreCase("") && !nombreCliente.getText().equalsIgnoreCase("") && !direccionCliente.getText().equalsIgnoreCase("") && !cedulaVendedor.getText().equalsIgnoreCase("") && !this.nombreVendedor.getText().equalsIgnoreCase("") && !identificador.getText().equalsIgnoreCase("") && !nombreProducto.getText().equalsIgnoreCase("") && !canti.getText().equalsIgnoreCase("") && !nombreProducto.getText().equalsIgnoreCase("No encontrado")) {
+            System.out.println("Todos los input estan llenos ");
+            String cc_cliente = this.inputCedula.getText();
+            String nombre_cliente = this.nombreCliente.getText();
+            String direccion_cliente = this.direccionCliente.getText();
+            String cc_vendedor = this.cedulaVendedor.getText();
+            String nombre_vendedor = this.nombreVendedor.getText();
+            String identificador = this.identificador.getText();
+            String nombre_producto = this.nombreProducto.getText();
+            String cantidad = this.canti.getText();
+            int total = this.totalPagar;
+            // creamos el ciclo para guardar el contenido de la factura en el areglo
+            ListaFacturas temporal = new ListaFacturas(cc_cliente, nombre_cliente,
+                    direccion_cliente, cc_vendedor, nombre_vendedor, identificador,
+                    nombre_producto, cantidad, total);
+            for (int i = 0; i < this.facturas.length; i++) {
+                if (this.facturas[i] == null) {
+                    this.facturas[i] = temporal;
+                    System.out.println("Registrado con exito");
+                    break;
+                }
+            }
+            //cerramo la pagina cuando haga la compra 
+            this.ventanaMenu.setVisible(true);
+            this.dispose();
+        } else {
+            System.out.println("Alguno de los input falta  por llenar");
+        }
+
+    }//GEN-LAST:event_Guardar1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Compra;
-    private javax.swing.JButton Guardar;
     private javax.swing.JButton Guardar1;
+    private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton buscadorCedula;
     private javax.swing.JTextField canti;
     private javax.swing.JButton cedulaVen;
@@ -524,9 +560,7 @@ public class Factura extends javax.swing.JFrame {
     private javax.swing.JTextField direccionCliente;
     private javax.swing.JTextField identificador;
     private javax.swing.JTextField inputCedula;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -537,17 +571,9 @@ public class Factura extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField nombreCliente;
     private javax.swing.JTextField nombreProducto;
     private javax.swing.JTextField nombreVendedor;

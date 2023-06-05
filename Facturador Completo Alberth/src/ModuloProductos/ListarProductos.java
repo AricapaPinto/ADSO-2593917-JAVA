@@ -14,7 +14,7 @@ public class ListarProductos extends javax.swing.JFrame {
     
     Menu ventanaMenu;
     Productos listaProductos[];
-    int indexLista;
+   
     
     private JLabel etqTemporal;
     
