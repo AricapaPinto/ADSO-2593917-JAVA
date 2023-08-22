@@ -4,7 +4,7 @@ import Clases.Persona;
 import Principal.Menu;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
+import java.awt.*;
 import java.awt.Insets;
 import javax.swing.*;
 import javax.swing.border.Border;
