@@ -1,12 +1,14 @@
 <?php
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class listenUsers extends CI_Controller
-{
+// creamos la clase para actulizar los datos de una persona
 
-    public function getListenUsers()
-    {
-        $this->load->model('ListenUsersModel');
+class UpdateUsers extends CI_Controller
+{
+    // metodo para cargar la vista 
+    public function UsersListen(){
+        $this->load->model('deleteUserModel');
         // cargamos el inicio de sesion 
         $datos['session'] = $this->session->userdata("session-mvc");
         // cargamos el model para usar el metodo de mostrar los datos del usuario 
@@ -14,7 +16,7 @@ class listenUsers extends CI_Controller
         // creamos una variable data para usar la variable creada para mostrar todos los datos de los usuarios registrados 
 
 
-        $respuesta = $this->ListenUsersModel->getUserListen();
+        $respuesta = $this->deleteUserModel->listaUsers();
 
         $datos['lista'] = $respuesta;
 
@@ -22,7 +24,9 @@ class listenUsers extends CI_Controller
 
 
         // ahora cargamos los datos a la vista la cual queremos mostrar 
-        $this->load->view('admin/verUsuarios', $datos); // y le mandamos la variable data para usar la variable user para mostrar los datos a dicha vista 
+        $this->load->view('admin/actualizar', $datos); // y le mandamos la variable data para usar la variable user para mostrar los datos a dicha vista 
     }
-    
+    public function UpdateUser(){
+       
+    }
 }
