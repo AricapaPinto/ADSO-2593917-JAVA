@@ -60,7 +60,6 @@ $this->load->view('layouts/sidebar', $dataSidebar);
         }
         ?>
       </tbody>
-
     </table>
   </div>
 </div>
@@ -75,40 +74,43 @@ $this->load->view('layouts/sidebar', $dataSidebar);
       </div>
       <div class="modal-body">
         <!--creamos el formulario el cual vamos a agregar el usuario   -->
-        <form action="#" method="POST" id="actulizarCliente">
+        <form action="<?php echo base_url("index.php/admin/UpdateUsers/actualizarPersona") ?>" method="POST"
+          id="actulizarCliente">
           <div class="mb-3">
             <i class="fas fa-file"></i>
             <label for="document" class="form-label">Documento</label>
-            <input type="text" class="form-control" id="editar_documento" aria-describedby="documento-identidad"
-              readonly>
-
+            <input type="text" class="form-control" id="editar_documento" name="documento"
+              aria-describedby="documento-identidad" readonly>
           </div>
           <div class="mb-3">
             <i class="fas fa-user"></i>
             <label for="name" class="form-label">Nombres</label>
-            <input type="text" class="form-control" id="editar_nombre" aria-describedby="nombres_user" required>
+            <input type="text" class="form-control" id="editar_nombre" name="nombres" aria-describedby="nombres_user"
+              required>
           </div>
           <div class="mb-3">
             <i class="fas fa-user"></i>
             <label for="exampleInputEmail1" class="form-label">Apellidos</label>
-            <input type="text" class="form-control" id="editar_apellido" aria-describedby="emailHelp" required>
-
+            <input type="text" class="form-control" id="editar_apellido" name="apellidos" aria-describedby="emailHelp"
+              required>
           </div>
           <div class="mb-3">
             <i class="fas fa-phone"></i>
-            <label for="exampleInputEmail1" class="form-label">Telefonos</label>
-            <input type="text" class="form-control" id="editar_telefonos" aria-describedby="emailHelp" required>
-
+            <label for="exampleInputEmail1" class="form-label">Teléfonos</label>
+            <input type="text" class="form-control" id="editar_telefonos" name="telefonos" aria-describedby="emailHelp"
+              required>
           </div>
           <div class="mb-3">
             <i class="fas fa-map-marker-alt"></i>
-            <label for="exampleInputEmail1" class="form-label">Direccion</label>
-            <input type="text" class="form-control" id="editar_direcciones" aria-describedby="emailHelp" required>
+            <label for="exampleInputEmail1" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="editar_direcciones" name="direccion"
+              aria-describedby="emailHelp" required>
           </div>
           <div class="mb-3">
             <i class="fas fa-envelope"></i>
             <label for="exampleInputEmail1" class="form-label">Correo</label>
-            <input type="email" class="form-control" id="editar_correo" aria-describedby="emailHelp" required>
+            <input type="email" class="form-control" id="editar_correo" name="correo" aria-describedby="emailHelp"
+              required>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -119,6 +121,24 @@ $this->load->view('layouts/sidebar', $dataSidebar);
     </div>
   </div>
 </div>
+<?php if (isset($exitoso)): ?>
+  <script>
+    Swal.fire({
+      title: 'DATOS VALIDOS',
+      text: 'Se han actualizado los datos correctamente',
+      icon: 'success',
+    });
+  </script>
+<?php endif ?>
+<?php if (isset($error)): ?>
+  <script>
+    Swal.fire({
+      title: 'ERROR DE SERVIDOR',
+      text: 'Hubo un problema al actualizar los datos',
+      icon: 'error',
+    });
+  </script>
+<?php endif ?>
 <!-- cargamos el footer -->
 <?php
 $this->load->view('layouts/footer');
