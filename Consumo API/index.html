@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>CONSUMO API - PHP</title>
+	<!-- es para los mensajes de alerta -->
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css" rel="stylesheet">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<!-- link de boostrarp -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<!-- link de font awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" type="text/css" href="dist/css/estilos.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+	<script src="dist/js/script_ajax.js" type="text/javascript" charset="utf-8" async defer></script>
+</head>
+
+<body>
+
+	<div class="col-12 m-0 p-0 py-3 row justify-content-center vh-100">
+		<div class="col-7 m-0 p-0 border border-4 border-primary pstn-rltv">
+			<!-- Button trigger modal -->
+			<div class="user_add">
+				<button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+					Add User
+				</button>
+			</div>
+			<!-- aqui creamos la tabla de los usuarios -->
+			<table class="table">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col">Cedula</th>
+						<th scope="col">Nombres</th>
+						<th scope="col">Apellidos</th>
+						<th scope="col">Telefonos</th>
+						<th scope="col">Direccion</th>
+						<th scope="col">Eliminar</th>
+						<th scope="col">Actulizar</th>
+
+					</tr>
+				</thead>
+				<tbody id="date_user">
+
+				</tbody>
+			</table>
+
+			<div id="waitContent" class="waitContent" style="display:none;">
+				<div class="row h-100 justify-content-center">
+					<div class="col-12 m-0 p-0 text-center">
+						<div class="spinner-border m-0 text-primary" role="status">
+							<span class="visually-hidden font-3rem">Loading...</span>
+						</div>
+						<h3 class="m-0 p-0 text-primary">CARGANDO</h3>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- script de boostrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+	<!-- modal de boostrap -->
+
+	<!-- Modal  para crear el usuario-->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5 text-success" id="exampleModalLabel">Registro usuario</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<!--creamos el formulario el cual vamos a agregar el usuario   -->
+					<form action="#" method="POST" id="insertarDatos">
+						<div class="mb-3">
+							<i class="fa-solid fa-file"></i>
+							<label for="document" class="form-label">Documento</label>
+							<input type="text" class="form-control" id="documento"
+								aria-describedby="documento-identidad" required>
+
+						</div>
+						<div class="mb-3">
+							<i class="fa-solid fa-user"></i>
+							<label for="name" class="form-label">Nombres</label>
+							<input type="text" class="form-control" id="nombre" aria-describedby="nombres_user"
+								required>
+
+						</div>
+						<div class="mb-3">
+							<i class="fa-solid fa-user"></i>
+							<label for="exampleInputEmail1" class="form-label">Apellidos</label>
+							<input type="text" class="form-control" id="apellido" aria-describedby="emailHelp" required>
+
+						</div>
+						<div class="mb-3">
+							<i class="fa-solid fa-phone"></i>
+							<label for="exampleInputEmail1" class="form-label">Telefonos</label>
+							<input type="text" class="form-control" id="telefonos" aria-describedby="emailHelp"
+								required>
+
+						</div>
+						<div class="mb-3">
+							<i class="fa-solid fa-address-book"></i>
+							<label for="exampleInputEmail1" class="form-label">Direccion</label>
+							<input type="text" class="form-control" id="direcciones" aria-describedby="emailHelp"
+								required>
+						</div>
+						<div class="mb-3">
+							<i class="fa-solid fa-envelope"></i>
+							<label for="exampleInputEmail1" class="form-label">Correo</label>
+							<input type="email" class="form-control" id="correo" aria-describedby="emailHelp" required>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-primary">Agregar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- modal para editar a el usuario  -->
+	<div class="modal fade" id="modalEditarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5 text-success" id="exampleModalLabel">Actulizar Cliente</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<!--creamos el formulario el cual vamos a agregar el usuario   -->
+					<form action="#" method="POST" id="actulizarCliente">
+						<div class="mb-3">
+							<i class="fa-solid fa-file"></i>
+							<label for="document" class="form-label">Documento</label>
+							<input type="text" class="form-control" id="editar_documento"
+								aria-describedby="documento-identidad" readonly>
+
+						</div>
+						<div class="mb-3">
+							<i class="fa-solid fa-user"></i>
+							<label for="name" class="form-label">Nombres</label>
+							<input type="text" class="form-control" id="editar_nombre" aria-describedby="nombres_user"
+								required>
+						</div>
+						<div class="mb-3">
+							<i class="fa-solid fa-user"></i>
+							<label for="exampleInputEmail1" class="form-label">Apellidos</label>
+							<input type="text" class="form-control" id="editar_apellido" aria-describedby="emailHelp" required>
+
+						</div>
+						<div class="mb-3">
+							<i class="fa-solid fa-phone"></i>
+							<label for="exampleInputEmail1" class="form-label">Telefonos</label>
+							<input type="text" class="form-control" id="editar_telefonos" aria-describedby="emailHelp"
+								required>
+
+						</div>
+						<div class="mb-3">
+							<i class="fa-solid fa-address-book"></i>
+							<label for="exampleInputEmail1" class="form-label">Direccion</label>
+							<input type="text" class="form-control" id="editar_direcciones" aria-describedby="emailHelp"
+								required>
+						</div>
+						<div class="mb-3">
+							<i class="fa-solid fa-envelope"></i>
+							<label for="exampleInputEmail1" class="form-label">Correo</label>
+							<input type="email" class="form-control" id="editar_correo" aria-describedby="emailHelp" required>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-primary">Agregar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
