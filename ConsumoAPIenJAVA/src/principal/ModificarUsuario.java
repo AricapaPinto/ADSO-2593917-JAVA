@@ -19,6 +19,7 @@ public class ModificarUsuario extends javax.swing.JFrame {
 
     String titulo;
     ConsumoAPI ejemplo = new ConsumoAPI();
+
     public ModificarUsuario(Menu ventanaMenu, String titulo) {
         this.ventanaMenu = ventanaMenu;
         this.titulo = titulo;
@@ -305,10 +306,14 @@ public class ModificarUsuario extends javax.swing.JFrame {
             updateData.put("direccion", Direccion);
             updateData.put("email", Email);
             System.out.println("Consumo UPDATE: " + ejemplo.consumoPOST("http://localhost/APIenPHP/Update.php", updateData));
-            
+
             ventanaMenu.setVisible(true);
             //aqui se destruye una vez guarde los cambios
             dispose();
+            Alert ventana = new Alert("STATUS 200 OK", "Usuario Modificado con exito", "success");
+        } else {
+            // mandamos mensaje de error diciendole que no se pudieron actualizar los datos
+            Alert ventana = new Alert("Error 405", "No se pudo modificar el Usuario", "error");
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 

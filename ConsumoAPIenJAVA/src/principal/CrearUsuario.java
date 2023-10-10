@@ -1,8 +1,7 @@
 package principal;
 
-import principal.Persona;
-import principal.Menu;
-import principal.ConsumoAPI;
+import principal.*;
+
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
@@ -313,7 +312,7 @@ public class CrearUsuario extends javax.swing.JFrame {
             }
             // ahora insertamos los datos sabiendo que la cedula is not repeat
 
-            if (CC_valida ==false) {
+            if (CC_valida == false) {
                 Map<String, String> insertData = new HashMap<>();
                 insertData.put("cedula", cedula);
                 insertData.put("nombres", nombres);
@@ -326,12 +325,17 @@ public class CrearUsuario extends javax.swing.JFrame {
 
                 this.ventanaMenu.setVisible(true);
                 dispose();
-            }else{
+                Alert alerta = new Alert("Insertado con exito", "Usuario registrado con exito", "success");
+            } else {
                 // podemos mostrar un mensaje de alerta aqui si queremos 
                 System.out.println("La cedula ya se encuentra en el sistema");
+                // aqui creamos un alert diciendole que la cedula ya se encuentra registrada
+                Alert alerta = new Alert("Cedula Invalida", "Cedula ya registrada", "warning");
             }
         } else {
             validarTodosInputs();
+            // enviamos que todos los imput son obligatorios
+            Alert alerta = new Alert("Campos vacios", "Todos los campos son obligatorios", "error");
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 

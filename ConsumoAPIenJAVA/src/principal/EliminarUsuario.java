@@ -14,7 +14,7 @@ public class EliminarUsuario extends javax.swing.JFrame {
     Menu ventMenu;
     Persona listapersonas[];
     String titulo;
-    ConsumoAPI ejemplo =new ConsumoAPI();
+    ConsumoAPI ejemplo = new ConsumoAPI();
 
     public EliminarUsuario(Menu ventMenu, String titulo) {
         this.ventMenu = ventMenu;
@@ -266,6 +266,10 @@ public class EliminarUsuario extends javax.swing.JFrame {
 
             ventMenu.setVisible(true);
             dispose();
+            Alert ventana = new Alert("Status 200 OK", "EL Uusuario se ha eliminado con exito", "success");
+        } else {
+            // le mandamos un mensaje de error que no se pudo borrar
+            Alert ventana = new Alert("Error 405", "Hubo un problema con el sistema a la hora de eliminar", "error");
         }
 
     }//GEN-LAST:event_btn_eliminarActionPerformed

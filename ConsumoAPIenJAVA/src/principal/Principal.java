@@ -4,18 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Principal {
-    public static void main(String[] args) {
-        
+    // no utilizamos el metodo para ejecutar ya que no lo nesecitamos aqui estos son solo los ejemplos que podemos usar para insertar
+    
+    public void metodosCrud() {
         ConsumoAPI ejemplo = new ConsumoAPI();
-        
+
         // GET sin datos
         System.out.println("Consumo GET: " + ejemplo.consumoGET("http://localhost/APIenPHP/Obtener.php"));
-        
+
         // GET con Datos
         Map<String, String> getData = new HashMap<>();
         getData.put("cedula", "108805");
         System.out.println("Consumo SELECT: " + ejemplo.consumoGET("http://localhost/APIenPHP/getPersona.php", getData));
-        
+
         // POST con Datos
         Map<String, String> insertData = new HashMap<>();
         insertData.put("cedula", "102200");
@@ -25,7 +26,7 @@ public class Principal {
         insertData.put("direccion", "Calle 20");
         insertData.put("email", "oscar@mail.com");
         System.out.println("Consumo INSERT: " + ejemplo.consumoPOST("http://localhost/APIenPHP/Insert.php", insertData));
-        
+
         // POST con Datos
         Map<String, String> updateData = new HashMap<>();
         updateData.put("cedula", "102200");
@@ -35,11 +36,10 @@ public class Principal {
         updateData.put("direccion", "Calle 20");
         updateData.put("email", "oscar@mail.com");
         System.out.println("Consumo UPDATE: " + ejemplo.consumoPOST("http://localhost/APIenPHP/Update.php", updateData));
-        
+
         // POST con Datos
         Map<String, String> deleteData = new HashMap<>();
         deleteData.put("cedula", "102200");
         System.out.println("Consumo DELETE: " + ejemplo.consumoPOST("http://localhost/APIenPHP/Delete.php", deleteData));
-        
-    }    
+    }
 }
