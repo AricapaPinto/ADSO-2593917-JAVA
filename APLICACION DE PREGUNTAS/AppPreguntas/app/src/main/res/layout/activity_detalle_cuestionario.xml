@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".detalleCuestionario">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            android:padding="15dp"
+            >
+            <TextView
+                android:id="@+id/nombre_user"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="bold"
+                android:textSize="20dp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/fecha_inicio"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Fecha De inicio :"
+                android:textSize="20dp"
+                >
+
+            </TextView>
+            <TextView
+                android:id="@+id/cant_preguntas"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Preguntas:"
+                android:textSize="20dp"
+
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/cant_incorrectas"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Incorrectas:"
+                android:textSize="20dp"
+                >
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/cant_correctas"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Correctas:"
+                android:textSize="20dp"
+                >
+            </TextView>
+
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@android:color/darker_gray"/>
+
+        </LinearLayout>
+
+        <!--ahora agregamos un scroll para mostrar la informacionn-->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            >
+
+
+            <LinearLayout
+                android:id="@+id/container_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#D6DADA"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <!-- aquí metemos los detalles del cuestionario :) -->
+
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="bottom|end"
+        >
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="volverAtras"
+            android:text="Atras"
+            android:layout_margin="10dp"
+            app:icon="@drawable/icon_sing_off"
+            app:iconGravity="end"
+            app:backgroundTint="#159c3b"
+            >
+        </com.google.android.material.button.MaterialButton>
+
+    </LinearLayout>
+</FrameLayout>
