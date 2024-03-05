@@ -50,7 +50,7 @@ public class detalleCuestionario extends AppCompatActivity {
         String id_cuestionario=intent.getStringExtra("id_cuestionario");
         String fecha=intent.getStringExtra("fecha_inicio");
         if(!id_cuestionario.equals("") && !fecha.equals("")){
-            //System.out.println("ID DEL CUESTIONARIO "+id_cuestionario);
+
             // mostramos el nombre del usuario la fecha de inicio
             //obtenemos el valor de shared
             SharedPreferences archivo=getSharedPreferences("app_preguntas", Context.MODE_PRIVATE);
