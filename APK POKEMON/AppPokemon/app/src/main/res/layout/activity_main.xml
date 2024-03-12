@@ -1,62 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="15dp"
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+
+
+        <ImageView
+            android:id="@+id/id_gif_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="79dp"
             android:src="@drawable/titulo_pokemon"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_pokemones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_pokemones"
+        android:layout_width="match_parent"
+        android:layout_height="606dp"
 
-            >
-
-        </androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
+        ></androidx.recyclerview.widget.RecyclerView>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        >
-
-
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_atras"
-            android:layout_width="200dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="ANTERIOR"
-            android:layout_gravity="bottom"
-            android:backgroundTint="#0c181c"
-            />
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/cuadrado_drawable"
+            android:backgroundTint="#2254D1"
+            android:text="ANTERIOR" />
 
         <Button
             android:id="@+id/btn_siguiente"
-            android:layout_width="200dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:backgroundTint="#2254D1"
             android:text="SIGUIENTE"
-            android:layout_gravity="bottom|end"
-            android:backgroundTint="#75c7ff"
+            android:background="@drawable/cuadrado_drawable"
             />
     </LinearLayout>
+    </LinearLayout>
 
-</FrameLayout>
+
+
 

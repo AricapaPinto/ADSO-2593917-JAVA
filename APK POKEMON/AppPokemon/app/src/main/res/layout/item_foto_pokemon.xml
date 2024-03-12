@@ -15,6 +15,7 @@
             android:id="@+id/id_foto_poke"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:src="@drawable/icono_pokeball"
             android:scaleType="fitXY"
            />
     </FrameLayout>

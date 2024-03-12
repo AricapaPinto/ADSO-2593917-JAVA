@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +29,8 @@ import java.util.List;
 public class InfoPokemon extends AppCompatActivity {
     RecyclerView recycler;
     TextView nombre_po,id_altura,id_peso;
-    List<PokeInfo>listaFotoPokemon=new ArrayList<>();;
+    List<PokeInfo>listaFotoPokemon=new ArrayList<>();
+    ImageView gif_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class InfoPokemon extends AppCompatActivity {
         this.nombre_po=findViewById(R.id.nombre_pokemon);
         this.id_altura=findViewById(R.id.id_altura);
         this.id_peso=findViewById(R.id.id_peso);
+        this.gif_image=findViewById(R.id.gif_img);
         // recuperamos los datos enviamos y se lo añadimos a nuestra vista
         Intent intent = getIntent();
         this.nombre_po.setText(intent.getStringExtra("pokemon_nombre"));
@@ -51,6 +55,14 @@ public class InfoPokemon extends AppCompatActivity {
         }
     }
     public void ConsumoInfoPoke(String url) {
+
+        Glide.with(getApplicationContext())
+                .asGif()
+                .load(R.drawable.loading_pokeball)
+                .into(gif_image);
+
+        this.gif_image.setVisibility(View.VISIBLE);
+
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest solicitud = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -138,6 +150,7 @@ public class InfoPokemon extends AppCompatActivity {
                 separator.setBackgroundColor(getResources().getColor(R.color.black));
                 linearLayout.addView(separator);
             }
+            gif_image.setVisibility(View.GONE);
             // Aquí puedes llamar a otros métodos para mostrar los datos en tu aplicación
         } catch (JSONException e) {
             e.printStackTrace();

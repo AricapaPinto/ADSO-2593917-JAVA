@@ -5,48 +5,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+
+    android:layout_marginBottom="1dp"
     >
 
-    <FrameLayout
+    <LinearLayout
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <!--contenido -->
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/identificador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0001"
+            android:textSize="20dp"
+            android:textStyle="bold"
 
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            />
 
-            <TextView
-                android:id="@+id/identificador"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0001"
-                android:textSize="20dp"
-                android:textStyle="bold"
+        <TextView
+            android:id="@+id/id_nombre"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
 
-                />
+            android:text="BULBASAUR"
+            android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/id_nombre"
-                android:layout_width="210dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-
-                android:text="BULBASAUR"
-                android:textSize="20dp" />
-
-            <ImageView
-                android:id="@+id/id_infoPoke"
-                android:layout_width="56dp"
-                android:layout_height="28dp"
-                android:layout_gravity="left|end"
-                android:src="@drawable/icono_pokeball" />
-        </LinearLayout>
-    </FrameLayout>
+        <ImageView
+            android:id="@+id/id_infoPoke"
+            android:layout_width="56dp"
+            android:layout_height="28dp"
+            android:layout_gravity="left|end"
+            android:src="@drawable/icono_pokeball" />
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>
